@@ -24,7 +24,8 @@ Used for post performance optimization. When the gaussian splats are very small,
 - Remove: Removes all points with the size smaller than the threshold from current selection
 
 ![SizeSelection](https://github.com/user-attachments/assets/5c07af7f-876c-4228-8da3-e32008147265)
-<img width="1032" height="558" alt="sizePruned" src="https://github.com/user-attachments/assets/8d283a5b-8ab7-4d99-9727-186115df700a" />
+<img width="657" height="352" alt="sizePruned" src="https://github.com/user-attachments/assets/338dc1fe-cfa0-4a49-8e71-3b9a917248f4" />
+
 
 
 ## Local Development
