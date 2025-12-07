@@ -82,10 +82,4 @@ To test your translations:
 
    Replace `<locale>` with your language code (e.g., `fr`, `de`, `es`).
 
-## Contributors
 
-SuperSplat is made possible by our amazing open source community:
-
-<a href="https://github.com/playcanvas/supersplat/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=playcanvas/supersplat" />
-</a>
