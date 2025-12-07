@@ -516,6 +516,36 @@ const registerEditorEvents = (events: Events, editHistory: EditHistory, scene: S
         });
     });
 
+    // Size threshold selection - selects all points with total size (x+y+z) below the given threshold
+    // This is useful for data cleanup by selecting tiny splats that contribute little to the visual quality
+    events.on('select.sizeThreshold', (op: 'add'|'remove'|'set', threshold: number) => {
+        const splats = selectedSplats();
+        if (!splats.length) {
+            return;
+        }
+
+        const sizeThreshold = Math.max(0, Number.isFinite(threshold) ? threshold : 0);
+
+        splats.forEach((splat) => {
+            const sizeX = splat.splatData.getProp('scale_0') as Float32Array;
+            const sizeY = splat.splatData.getProp('scale_1') as Float32Array;
+            const sizeZ = splat.splatData.getProp('scale_2') as Float32Array;
+            
+            if (!sizeX || !sizeY || !sizeZ) {
+                return;
+            }
+
+            // filter to select points with total size below threshold
+            const filter = (i: number) => {
+                // Convert scale values from log space to actual size and sum them
+                const totalSize = Math.exp(sizeX[i]) + Math.exp(sizeY[i]) + Math.exp(sizeZ[i]);
+                return totalSize < sizeThreshold;
+            };
+
+            events.fire('edit.add', new SelectOp(splat, op, filter));
+        });
+    });
+
     events.on('select.hide', () => {
         selectedSplats().forEach((splat) => {
             events.fire('edit.add', new HideSelectionOp(splat));
