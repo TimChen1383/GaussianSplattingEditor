@@ -1,0 +1,25 @@
+<svg
+   width="38"
+   height="38"
+   viewBox="0 0 38 38"
+   fill="none"
+   version="1.1"
+   xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle with low opacity -->
+  <circle cx="19" cy="19" r="12" fill="none" stroke="currentColor" stroke-width="2" stroke-opacity="0.3"/>
+  
+  <!-- Main circle representing opacity -->
+  <circle cx="19" cy="19" r="8" fill="none" stroke="currentColor" stroke-width="2"/>
+  
+  <!-- Inner filled circle with varying opacity -->
+  <circle cx="19" cy="19" r="5" fill="currentColor" fill-opacity="0.6"/>
+  
+  <!-- Small indicator dots showing opacity gradient -->
+  <circle cx="13" cy="19" r="1.5" fill="currentColor" fill-opacity="0.2"/>
+  <circle cx="16" cy="19" r="1.5" fill="currentColor" fill-opacity="0.4"/>
+  <circle cx="22" cy="19" r="1.5" fill="currentColor" fill-opacity="0.8"/>
+  <circle cx="25" cy="19" r="1.5" fill="currentColor" fill-opacity="1"/>
+  
+  <!-- Selection cursor indicator -->
+  <path d="M19 9 L21 11 L17 11 Z" fill="currentColor"/>
+</svg>

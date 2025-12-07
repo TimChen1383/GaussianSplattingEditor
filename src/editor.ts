@@ -489,6 +489,33 @@ const registerEditorEvents = (events: Events, editHistory: EditHistory, scene: S
         });
     });
 
+    // Opacity threshold selection - selects all points with opacity below the given threshold
+    // This is useful for data cleanup by selecting low-opacity points that are barely visible
+    events.on('select.opacityThreshold', (op: 'add'|'remove'|'set', threshold: number) => {
+        const splats = selectedSplats();
+        if (!splats.length) {
+            return;
+        }
+
+        const opacityThreshold = Math.min(1, Math.max(0, Number.isFinite(threshold) ? threshold : 0));
+
+        splats.forEach((splat) => {
+            const opacities = splat.splatData.getProp('opacity') as Float32Array;
+            if (!opacities) {
+                return;
+            }
+
+            // filter to select points with opacity below threshold
+            const filter = (i: number) => {
+                // Convert logit to probability using sigmoid function
+                const opacity = 1 / (1 + Math.exp(-opacities[i]));
+                return opacity < opacityThreshold;
+            };
+
+            events.fire('edit.add', new SelectOp(splat, op, filter));
+        });
+    });
+
     events.on('select.hide', () => {
         selectedSplats().forEach((splat) => {
             events.fire('edit.add', new HideSelectionOp(splat));

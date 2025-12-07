@@ -18,6 +18,7 @@ import { registerTimelineEvents } from './timeline';
 import { BoxSelection } from './tools/box-selection';
 import { BrushSelection } from './tools/brush-selection';
 import { EyedropperSelection } from './tools/eyedropper-selection';
+import { OpacitySelection } from './tools/opacity-selection';
 import { FloodSelection } from './tools/flood-selection';
 import { LassoSelection } from './tools/lasso-selection';
 import { MeasureTool } from './tools/measure-tool';
@@ -89,6 +90,7 @@ const initShortcuts = (events: Events) => {
     shortcuts.register(['B', 'b'], { event: 'tool.brushSelection', sticky: true });
     shortcuts.register(['O', 'o'], { event: 'tool.floodSelection', sticky: true });
     shortcuts.register(['E', 'e'], { event: 'tool.eyedropperSelection', sticky: true });
+    shortcuts.register(['Y', 'y'], { event: 'tool.opacitySelection', sticky: true });
     shortcuts.register(['A', 'a'], { event: 'select.all', ctrl: true });
     shortcuts.register(['A', 'a'], { event: 'select.none', shift: true });
     shortcuts.register(['I', 'i'], { event: 'select.invert', ctrl: true });
@@ -242,6 +244,7 @@ const main = async () => {
     toolManager.register('sphereSelection', new SphereSelection(events, scene, editorUI.canvasContainer));
     toolManager.register('boxSelection', new BoxSelection(events, scene, editorUI.canvasContainer));
     toolManager.register('eyedropperSelection', new EyedropperSelection(events, editorUI.toolsContainer.dom, editorUI.canvasContainer));
+    toolManager.register('opacitySelection', new OpacitySelection(events, editorUI.toolsContainer.dom, editorUI.canvasContainer));
     toolManager.register('move', new MoveTool(events, scene));
     toolManager.register('rotate', new RotateTool(events, scene));
     toolManager.register('scale', new ScaleTool(events, scene));

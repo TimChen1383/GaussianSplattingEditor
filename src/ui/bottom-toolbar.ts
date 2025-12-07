@@ -5,6 +5,7 @@ import { localize } from './localization';
 import redoSvg from './svg/redo.svg';
 import brushSvg from './svg/select-brush.svg';
 import eyedropperSvg from './svg/select-eyedropper.svg';
+import opacitySvg from './svg/select-opacity.svg';
 import floodSvg from './svg/select-flood.svg';
 import lassoSvg from './svg/select-lasso.svg';
 import pickerSvg from './svg/select-picker.svg';
@@ -85,6 +86,11 @@ class BottomToolbar extends Container {
             class: 'bottom-toolbar-tool'
         });
 
+        const opacity = new Button({
+            id: 'bottom-toolbar-opacity',
+            class: 'bottom-toolbar-tool'
+        });
+
         // const crop = new Button({
         //     id: 'bottom-toolbar-crop',
         //     class: ['bottom-toolbar-tool', 'disabled']
@@ -136,6 +142,7 @@ class BottomToolbar extends Container {
         box.dom.appendChild(createSvg(boxSvg));
         lasso.dom.appendChild(createSvg(lassoSvg));
         eyedropper.dom.appendChild(createSvg(eyedropperSvg));
+        opacity.dom.appendChild(createSvg(opacitySvg));
         // crop.dom.appendChild(createSvg(cropSvg));
 
         this.append(undo);
@@ -147,6 +154,7 @@ class BottomToolbar extends Container {
         this.append(brush);
         this.append(flood);
         this.append(eyedropper);
+        this.append(opacity);
         this.append(new Element({ class: 'bottom-toolbar-separator' }));
         this.append(sphere);
         this.append(box);
@@ -168,6 +176,7 @@ class BottomToolbar extends Container {
         flood.dom.addEventListener('click', () => events.fire('tool.floodSelection'));
         picker.dom.addEventListener('click', () => events.fire('tool.rectSelection'));
         eyedropper.dom.addEventListener('click', () => events.fire('tool.eyedropperSelection'));
+        opacity.dom.addEventListener('click', () => events.fire('tool.opacitySelection'));
         sphere.dom.addEventListener('click', () => events.fire('tool.sphereSelection'));
         box.dom.addEventListener('click', () => events.fire('tool.boxSelection'));
         translate.dom.addEventListener('click', () => events.fire('tool.move'));
@@ -197,6 +206,7 @@ class BottomToolbar extends Container {
             scale.class[toolName === 'scale' ? 'add' : 'remove']('active');
             measure.class[toolName === 'measure' ? 'add' : 'remove']('active');
             eyedropper.class[toolName === 'eyedropperSelection' ? 'add' : 'remove']('active');
+            opacity.class[toolName === 'opacitySelection' ? 'add' : 'remove']('active');
         });
 
         events.on('tool.coordSpace', (space: 'local' | 'world') => {
@@ -224,6 +234,7 @@ class BottomToolbar extends Container {
         tooltips.register(coordSpace, localize('tooltip.bottom-toolbar.local-space'));
         tooltips.register(origin, localize('tooltip.bottom-toolbar.bound-center'));
         tooltips.register(eyedropper, localize('tooltip.bottom-toolbar.eyedropper'));
+        tooltips.register(opacity, localize('tooltip.bottom-toolbar.opacity'));
     }
 }
 
